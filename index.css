@@ -1,0 +1,355 @@
+:root {
+  --cor-primaria: #FF5722;
+  --cor-hover: #F4511E;
+  --cor-texto: #222222;
+  --cor-texto2: #1A237E;
+  --cor-fundo: #FFFDF7;
+  --cor-secundaria: #212121;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+#ideia1 {
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    flex: 1;
+    gap:10px;
+    background-color: var(--cor-texto2);
+}
+body {
+  background-color:#FFFDF7;
+  color: var(--cor-texto);
+  font-family: 'Roboto', sans-serif;
+}
+p,a,h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+}
+header {
+   color: black;
+   border-radius:15px;
+}
+#cupons {
+    margin-left:350px;
+    color:black;
+}
+#sobre {
+    color:black;
+    margin-left:350px;
+}
+#searchproduto2 {
+    margin-left:160px;
+    padding:10px;
+    border-radius:20px;
+    width:525px;
+    border: 2px solid var(--cor-secundaria);
+    color: var(--cor-texto);
+}
+/* Centraliza a logo no topo */
+body {
+
+    font-family: Arial, sans-serif;
+
+}
+h1 {
+    font-size: 30px;
+    font-weight: 30px;
+
+}
+a {
+    font-size: 30px;
+    text-decoration: none;
+}
+main {
+     flex: 1;
+     margin-bottom:30px;
+     margin-top:400px;
+}
+#selectsearch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  text-align:center;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 5px;
+}
+/* Os dois primeiros lado a lado */
+#categoriaFiltro,
+#searchProduto {
+  flex: 1 1 45%; /* usa porcentagem menor pra caber no celular */
+  height: 55px;
+  padding: 10px;
+  font-size: 18px;
+  border: 2px solid var(--cor-secundaria);
+  color: var(--cor-texto);
+  border-radius: 5px;
+  min-width: 0; /* evita travar o layout */
+}
+/* O terceiro embaixo */
+#valor {
+  flex: 1 1 40%;
+  height: 55px;
+  padding: 10px;
+  font-size: 18px;
+  border: 2px solid black;
+  border-radius: 5px;
+  max-width:60%;
+  border: 2px solid var(--cor-secundaria);
+  color: var(--cor-texto);
+}
+.produtos-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+.produto {
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    background: white;
+    transition: transform 0.3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    border: 2px solid  black;
+}
+.produto:hover {
+    background:white;
+    transform: scale(1.05);
+    border-radius: 15px;
+    transition: 0.3s ease-in-out;
+}
+.produto img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 20px;
+    border: 2px solid  black;
+}
+.produto h3 {
+    font-size: 25px;
+    margin: 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* isso é normal ksksk */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    color:black;
+}
+.produto p {
+    font-size: 30px;
+    font-weight: bold;
+    color: blue;
+}
+.produto h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: var(--cor-primaria);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content:center;
+   -webkit-text-stroke: 0.7px black;
+   color:#F4511E;
+}
+
+.produto h4 i {
+  color: #F4511E;
+
+}
+.produto a {
+    display: inline-block;
+    background: var(--cor-primaria);
+    color:  white;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.produto a:hover {
+    background: #e6b800;
+}
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 10px 15px;
+  text-decoration: none;
+  background-color: white;
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-secundaria);
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+  min-width: 44px;
+  text-align: center;
+}
+
+.pagination a:hover {
+  background-color: var(--cor-hover);
+  color: white;
+  transform: scale(1.05);
+
+}
+
+/* Página atual */
+.pagination .ativo {
+  background-color: var(--cor-primaria);
+  color: white;
+  border: 2px solid var(--cor-primaria);
+  pointer-events: none;
+}
+footer {
+    padding: 20px;
+    background-color: var(--cor-secundaria);
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    margin-top:50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+#listaProdutos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    justify-content: center;
+    padding-top: 30px;
+}
+@media (max-width:600px) {
+    #logo {
+        font-size:170px;
+    }
+
+}
+@media (max-width:500px) {
+    #logo {
+        font-size:140px;
+    }
+    .produto-container {
+        width:5%;
+    }
+}
+@media (max-width:400px) {
+    #logo {
+        font-size:120px;
+    }
+    .produto-container {
+        width:5%;
+    } 
+}
+@media (max-width:525px) {
+    #listaProduto {
+        width:5%;
+    }
+}
+@media (max-width:500px) {
+    #listaProduto {
+        width:60%;
+
+    }
+    .produto {
+        width:130px;
+    }
+    .produto a {
+        width:100%;
+        font-size:20px;
+    }
+    .produto h3 {
+        font-size:20px;
+    }
+    .produto p {
+        font-size:20px;
+    }
+    #categoriaFiltro {
+        width:310px;
+    }
+    #searchProduto {
+        width:300px;
+    }
+}
+@media (max-width:400px) {
+    #logo-container {
+     margin-top:100px;
+    }
+    #logo {
+        font-size:110px;
+
+    }
+    .produto {
+        width:120px;
+    }
+    .produto a  {
+   font-size:18px;
+    }
+}
+@media (max-width:350px) {
+    .produto {
+        width:125px;
+        margin:0px;
+    }
+    .produto h4 {
+        font-size:18px;
+    }
+    .produto a {
+        font-size:18px;
+    }
+    .produto img {
+        width:100%;
+    }
+    #logo-container {
+        font-size:30px;
+    }
+    #logo {
+        font-size:100px;
+    }
+    #mudarcor {
+        font-size:15px;
+    }
+    #sobre {
+        font-size:15px;
+    }
+    #mudarcor-container {
+        font-size:10px;
+    }
+    #selectsearch {
+        margin-right:40px;
+        width:325px;
+    }
+}
+@media (max-width:330px) {
+    #logo {
+        font-size:100px;
+    }
+    .produto {
+        width:119.5px;
+    }
+    #selectsearch {
+      margin-left:-10px;
+    }
+}
