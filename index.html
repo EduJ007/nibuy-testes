@@ -17,15 +17,24 @@
 <header>
  <div id="ideia1">
 
- <img src="favicon.ico" alt=""> <h1>𝙉𝙞𝙗𝙪𝙮</h1>
+
+<img src="favicon.ico" alt="Nibuy" id="nibuy" onclick="location.reload()">
+<h1 id="nibuy2" onclick="location.reload()">𝙉𝙞𝙗𝙪𝙮</h1>
+
 
 <a href="Cupons" id="cupons"><h1>🏷️𝘾𝙪𝙥𝙤𝙣𝙨</h1><a>
 
+
 <a href="Sobreonibuy" id="sobre"><h1>📝𝙎𝙤𝙗𝙧𝙚</h1></a>
- 
-<input id="searchproduto2" placeholder="Procure o Produto aqui..." type="search"/>
+
+
+<div class="search-wrapper">
+  <input id="searchproduto2" placeholder="Procure o Produto aqui..." type="search"/>
+  <button id="btnBuscar">🔍</button>
 </div>
 
+</div>
+<div id="resultadosBusca" class="resultados-busca"></div>
 </header>
 
 <main>
@@ -6614,7 +6623,82 @@
   });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById("searchproduto2");
+  const btnBuscar = document.getElementById("btnBuscar");
+  const resultados = document.getElementById("resultadosBusca");
+  const produtos = document.querySelectorAll(".produto");
 
+  function mostrarResultados(filtro) {
+    resultados.innerHTML = '';
+    let achou = false;
+
+    produtos.forEach(produto => {
+      const nome = produto.querySelector("h3")?.textContent.toLowerCase() || '';
+      if (nome.includes(filtro.toLowerCase())) {
+        achou = true;
+
+        const imagem = produto.querySelector("img")?.src || '';
+        const preco = produto.querySelector("p")?.textContent || '';
+        const link = produto.querySelector("a")?.href || '#';
+
+        const item = document.createElement("div");
+        item.className = "resultado-item";
+        item.innerHTML = `
+          <img src="${imagem}">
+          <div class="resultado-info">
+            <h4>${nome}</h4>
+            <p>${preco}</p>
+          </div>
+        `;
+        item.onclick = () => window.open(link, '_blank');
+        resultados.appendChild(item);
+      }
+    });
+
+    resultados.style.display = achou ? 'block' : 'none';
+
+    // Se não achou, redireciona no Enter ou clique
+    if (!achou) {
+      input.dataset.naoAchou = "1"; // marca como não encontrado
+    } else {
+      input.dataset.naoAchou = "0"; // limpa marcação
+    }
+  }
+
+  input.addEventListener("input", () => {
+    const termo = input.value.trim();
+    if (termo.length > 1) {
+      mostrarResultados(termo);
+    } else {
+      resultados.innerHTML = '';
+      resultados.style.display = 'none';
+    }
+  });
+
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const termo = input.value.trim();
+      mostrarResultados(termo);
+
+      // Se não achou, vai para o Google
+      if (input.dataset.naoAchou === "1") {
+        window.open(`https://www.google.com/search?q=${encodeURIComponent(termo)}+site:shopee.com.br`, '_blank');
+      }
+    }
+  });
+
+  btnBuscar.addEventListener("click", () => {
+    const termo = input.value.trim();
+    mostrarResultados(termo);
+
+    if (input.dataset.naoAchou === "1") {
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(termo)}+site:shopee.com.br`, '_blank');
+    }
+  });
+});
+</script>
 
 </body>
 </html>

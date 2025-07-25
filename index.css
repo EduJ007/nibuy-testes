@@ -19,23 +19,31 @@ html, body {
     flex-direction: column;
 }
 #ideia1 {
-    display: flex;
-    padding: 20px;
-    flex-wrap: wrap;
-    flex: 1;
-    gap:10px;
-    background-color: var(--cor-texto2);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap:5px;
+  background-color: #1626df;
+  color: black;
+  flex-wrap: wrap;
 }
 body {
-  background-color:#FFFDF7;
+  background-color:#fffdf700;
   color: var(--cor-texto);
   font-family: 'Roboto', sans-serif;
 }
 p,a,h1, h2, h3, h4 {
   font-family: 'Poppins', sans-serif;
 }
+#nibuy:hover {
+    cursor: pointer;
+    display: inline-block;
+}
+#nibuy2:hover {
+    cursor: pointer;
+    display: inline-block;
+}
 header {
-   color: black;
    border-radius:15px;
 }
 #cupons {
@@ -46,14 +54,99 @@ header {
     color:black;
     margin-left:350px;
 }
-#searchproduto2 {
-    margin-left:160px;
-    padding:10px;
-    border-radius:20px;
-    width:525px;
-    border: 2px solid var(--cor-secundaria);
-    color: var(--cor-texto);
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid black;
+  border-radius: 30px;
+  overflow: hidden;
+  width: fit-content;
+  margin-left: 150px;
 }
+
+#searchproduto2 {
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  width: 500px;
+  border-radius: 0; /* deixa reto dentro do wrapper */
+}
+
+#btnBuscar {
+  background-color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 22px;
+  cursor: pointer;
+  height: 100%;
+  cursor: pointer; 
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #ccc; /* divisória suave */
+}
+.resultados-busca {
+  display:none;
+  position: absolute;
+  top: 75px;
+  left: 1310px;
+  width: 500px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.resultado-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
+}
+
+.resultado-item:hover {
+  background-color: #f1f1f1;
+}
+
+.resultado-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.resultado-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.resultado-info h4 {
+  font-size: 14px;
+  margin: 0;
+  color: black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.resultado-info p {
+  font-size: 13px;
+  margin: 2px 0;
+  color: #333;
+}
+
 /* Centraliza a logo no topo */
 body {
 
