@@ -6630,15 +6630,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultados = document.getElementById("resultadosBusca");
   const produtos = document.querySelectorAll(".produto");
 
-  function mostrarResultados(filtro) {
+  function mostrarResultadosSugestao(termo) {
     resultados.innerHTML = '';
+    const filtro = termo.toLowerCase();
     let achou = false;
 
     produtos.forEach(produto => {
       const nome = produto.querySelector("h3")?.textContent.toLowerCase() || '';
-      if (nome.includes(filtro.toLowerCase())) {
+      if (nome.includes(filtro)) {
         achou = true;
-
         const imagem = produto.querySelector("img")?.src || '';
         const preco = produto.querySelector("p")?.textContent || '';
         const link = produto.querySelector("a")?.href || '#';
@@ -6648,54 +6648,68 @@ document.addEventListener('DOMContentLoaded', () => {
         item.innerHTML = `
           <img src="${imagem}">
           <div class="resultado-info">
-            <h4>${nome}</h4>
+            <h4>${produto.querySelector("h3").textContent}</h4>
             <p>${preco}</p>
           </div>
         `;
-        item.onclick = () => window.open(link, '_blank');
+        item.addEventListener('click', () => {
+          window.open(link, '_blank');
+        });
+
         resultados.appendChild(item);
       }
     });
 
     resultados.style.display = achou ? 'block' : 'none';
+  }
 
-    // Se não achou, redireciona no Enter ou clique
-    if (!achou) {
-      input.dataset.naoAchou = "1"; // marca como não encontrado
+  function aplicarFiltroNaTela(termo) {
+    const filtro = termo.toLowerCase();
+    let algumMostrado = false;
+
+    produtos.forEach(produto => {
+      const nome = produto.querySelector("h3")?.textContent.toLowerCase() || '';
+      if (nome.includes(filtro)) {
+        produto.style.display = "block";
+        algumMostrado = true;
+      } else {
+        produto.style.display = "none";
+      }
+    });
+
+    // Se nenhum produto achado, pode mostrar mensagem ou deixar vazio mesmo
+    if (!algumMostrado) {
+      resultados.innerHTML = "<div class='resultado-item'>Nenhum produto encontrado</div>";
+      resultados.style.display = "block";
     } else {
-      input.dataset.naoAchou = "0"; // limpa marcação
+      resultados.style.display = "none"; // Esconde sugestão depois de aplicar
     }
   }
 
   input.addEventListener("input", () => {
     const termo = input.value.trim();
     if (termo.length > 1) {
-      mostrarResultados(termo);
+      mostrarResultadosSugestao(termo);
     } else {
       resultados.innerHTML = '';
       resultados.style.display = 'none';
+      // Se o campo ficou vazio, mostra todos os produtos
+      produtos.forEach(produto => produto.style.display = "block");
     }
   });
 
   input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       const termo = input.value.trim();
-      mostrarResultados(termo);
-
-      // Se não achou, vai para o Google
-      if (input.dataset.naoAchou === "1") {
-        window.open(`https://www.google.com/search?q=${encodeURIComponent(termo)}+site:shopee.com.br`, '_blank');
-      }
+      aplicarFiltroNaTela(termo);
     }
   });
 
-  btnBuscar.addEventListener("click", () => {
+  btnBuscar.addEventListener("click", (e) => {
+    e.preventDefault();
     const termo = input.value.trim();
-    mostrarResultados(termo);
-
-    if (input.dataset.naoAchou === "1") {
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(termo)}+site:shopee.com.br`, '_blank');
-    }
+    aplicarFiltroNaTela(termo);
   });
 });
 </script>
