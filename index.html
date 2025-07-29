@@ -29,7 +29,7 @@
 
 
 <div class="search-wrapper">
-  <input id="searchproduto2" placeholder="Procure o Produto aqui..." type="search"/>
+  <input id="searchproduto2" placeholder="Nome do Produto..." type="search"/>
   <button id="btnBuscar">🔍</button>
 </div>
 
@@ -6628,89 +6628,39 @@
 document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById("searchproduto2");
   const btnBuscar = document.getElementById("btnBuscar");
-  const resultados = document.getElementById("resultadosBusca");
-  const produtos = document.querySelectorAll(".produto");
 
-  function mostrarResultadosSugestao(termo) {
-    resultados.innerHTML = '';
-    const filtro = termo.toLowerCase();
-    let achou = false;
-
-    produtos.forEach(produto => {
-      const nome = produto.querySelector("h3")?.textContent.toLowerCase() || '';
-      if (nome.includes(filtro)) {
-        achou = true;
-        const imagem = produto.querySelector("img")?.src || '';
-        const preco = produto.querySelector("p")?.textContent || '';
-        const link = produto.querySelector("a")?.href || '#';
-
-        const item = document.createElement("div");
-        item.className = "resultado-item";
-        item.innerHTML = `
-          <img src="${imagem}">
-          <div class="resultado-info">
-            <h4>${produto.querySelector("h3").textContent}</h4>
-            <p>${preco}</p>
-          </div>
-        `;
-        item.addEventListener('click', () => {
-          window.open(link, '_blank');
-        });
-
-        resultados.appendChild(item);
-      }
-    });
-
-    resultados.style.display = achou ? 'block' : 'none';
-  }
-
-  function aplicarFiltroNaTela(termo) {
-    const filtro = termo.toLowerCase();
-    let algumMostrado = false;
-
-    produtos.forEach(produto => {
-      const nome = produto.querySelector("h3")?.textContent.toLowerCase() || '';
-      if (nome.includes(filtro)) {
-        produto.style.display = "block";
-        algumMostrado = true;
-      } else {
-        produto.style.display = "none";
-      }
-    });
-
-    // Se nenhum produto achado, pode mostrar mensagem ou deixar vazio mesmo
-    if (!algumMostrado) {
-      resultados.innerHTML = "<div class='resultado-item'>Nenhum produto encontrado</div>";
-      resultados.style.display = "block";
-    } else {
-      resultados.style.display = "none"; // Esconde sugestão depois de aplicar
-    }
-  }
+  // vamos atualizar o valor do #searchProduto, que já está conectado à paginação
+  const filtroInterno = document.getElementById("searchProduto");
 
   input.addEventListener("input", () => {
     const termo = input.value.trim();
-    if (termo.length > 1) {
-      mostrarResultadosSugestao(termo);
-    } else {
-      resultados.innerHTML = '';
-      resultados.style.display = 'none';
-      // Se o campo ficou vazio, mostra todos os produtos
-      produtos.forEach(produto => produto.style.display = "block");
-    }
+
+    // Atualiza o campo de pesquisa interna
+    if (filtroInterno) filtroInterno.value = termo;
+
+    // Força o evento de "input" para disparar o filtro
+    const event = new Event('input');
+    filtroInterno.dispatchEvent(event);
   });
 
   input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      const termo = input.value.trim();
-      aplicarFiltroNaTela(termo);
+      if (filtroInterno) {
+        filtroInterno.value = input.value.trim();
+        const event = new Event('input');
+        filtroInterno.dispatchEvent(event);
+      }
     }
   });
 
   btnBuscar.addEventListener("click", (e) => {
     e.preventDefault();
-    const termo = input.value.trim();
-    aplicarFiltroNaTela(termo);
+    if (filtroInterno) {
+      filtroInterno.value = input.value.trim();
+      const event = new Event('input');
+      filtroInterno.dispatchEvent(event);
+    }
   });
 });
 </script>
